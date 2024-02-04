@@ -1,0 +1,35 @@
+<html>
+	<head>
+		<style>
+			.square {border: 1px solid black;
+				 display: inline-block;
+				 padding: 10px;
+				 margin: 5px;
+				 height: 120px;
+				 width: 100px;}
+
+			.square:hover {background-color: pink;}
+
+			p {border: 2px solid black;
+			   width: 200px;
+			   height: 20px;
+			   font-size: 18px;
+			   text-align: center;}
+		</style>
+	</head>
+	<body>
+		<h2>Tic Tac Toe</h2>
+		<p>It is X's turn.</p>
+		<script>
+			const NUM_SQUARES = 9;
+				for (i=0; i<NUM_SQUARES; i++) {
+					if (i===3 || i===6) {
+						document.write("</br>")
+					}
+					id = "sq"+i;
+					document.write("<div class='square' id='" + id + "'></div>" );
+				}
+		</script>
+		<p>The winner is X.</p>
+	</body>
+</html>
