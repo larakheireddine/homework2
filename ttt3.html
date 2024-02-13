@@ -3,10 +3,16 @@
 		<style>
 			.square {border: 1px solid black;
 				 display: inline-block;
+				 padding: 5px;
+				 vertical-align: top;
+				 margin: 5px;
+				 height: 120px;
+				 width: 100px;
 				 text-align: center;
-				 height: 90px;
-				 width: 75px;}
+				 font-size: 60px;}
+
 			.square:hover {background-color: pink;}
+
 			p {border: 2px solid black;
 			   width: 200px;
 			   height: 20px;
@@ -16,54 +22,37 @@
 			#result {border: 2px solid black;
 				 margin-top: 20px;
 				 height: 40px;
-				 width: 200px;}
-		</style>		
+				 width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Tic Tac Toe</h2>
+		<p>It is X's turn.</p>
 		<script>
+			const NUM_SQUARES = 9;
+				for (i=0; i<NUM_SQUARES; i++) {
+					if (i===3 || i===6) {
+						document.write("</br>")
+					}
+					id = "sq"+i;
+					document.write("<div class='square' id='" + id + "'></div>" );		
+				}
 			window.onload= function() {
-				const NUM_SQUARES = 9;
-				for (j=0; j < NUM_SQUARES; j++) {
-					sq_click = document.querySelector(".sq" + j);
+				for (j=0; j <NUM_SQUARES; j++) {
+					sq_click = document.getElementById("sq" + j);
 					sq_click.addEventListener("click", function(){
 						result = document.getElementById("result");
-						theClass = this.className;
-						index = theClass.indexOf("sq")+ 9;
-						number = parseInt(theClass.substring(index)); 
-						result.innerHTML = "X in square " + number;
-						sq_show = document.getElementById(number);
-						sq_show.innerHTML ="X";
+						theID = this.id;
+						number = theID.substring(2); 
+						result.innerHTML = "There is now a X in square " + number;
+						this.innerHTML = "X";
 					})
 				}
 			}
 		</script>
-	<head>
-	<body>
-		<h2>Tic Tac Toe</h2>
-		<p>It is X's turn.</p>
-		<div>
-			<div class='square sq0' id="0">
-			</div>
-			<div class='square sq1' id="1">
-			</div>
-			<div class='square sq2' id="2">
-			</div>
-		</div>
-		<div>
-			<div class='square sq3' id="3">
-			</div>
-			<div class='square sq4' id="4">
-			</div>
-			<div class='square sq5' id="5">
-			</div>
-		</div>
-		<div>
-			<div class='square sq6' id="6">
-			</div>
-			<div class='square sq7' id="7">
-			</div>
-			<div class='square sq8' id="8">
-			</div>
-		</div>
-		<div id="result"></div>
+		<div id=result></div>
 		<p>The winner is X.</p>
-	<body>
+	</body>
 </html>
+
