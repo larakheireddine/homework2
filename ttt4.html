@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.square {border: 1px solid black;
+				 display: inline-block;
+				 padding: 5px;
+				 vertical-align: top;
+				 margin: 5px;
+				 height: 120px;
+				 width: 100px;
+				 text-align: center;
+				 font-size: 60px;}
+
+			.square:hover {background-color: pink;}
+
+            #board {width:420px}
+
+			p {border: 2px solid black;
+			   width: 200px;
+			   height: 20px;
+			   font-size: 18px;
+			   text-align: center;}
+
+			#result {border: 2px solid black;
+				 margin-top: 20px;
+				 height: 40px;
+				 width: 200px;
+			}
+
+			#turn {border: 2px solid black;
+				 margin-top: 20px;
+				 height: 40px;
+				 width: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Tic Tac Toe</h2>
+        <div id="turn"></div>
+        <div id="board">
+		<script>
+			const NUM_SQUARES = 9;
+				for (i=0; i<NUM_SQUARES; i++) {
+					id = "sq"+i;
+					document.write("<div class='square' id='" + id + "'></div>" );		
+				}
+
+            let fpatt = ['X', 'O', 'X','O', 'X', 'O','X', 'O', 'X'];
+            let spatt = ['O', 'X', 'O','X', 'O', 'X','O', 'X', 'O'];
+            let myTurn = ['X', 'O'];
+
+            window.onload=function() {
+                let turn = myTurn[Math.floor(Math.random()*myTurn.length)];
+                if (turn === 'X') {
+                    for (let j = 0; j < 9; j++) {
+                        sq_click = document.getElementById("sq" +j);
+                        sq_click.addEventListener("click", function(){
+                            result = document.getElementById("result");
+                            turn = document.getElementById("turn");
+						    theID = this.id;
+						    number = theID.substring(2); 
+						    result.innerHTML = "There is now a mark in square " + number;
+                            let mark = fpatt[j];
+                            turn.innerHTML = "It is " + mark + " turn";
+                            this.innerHTML = mark;
+                            console.log(fpatt[j]);
+                        })
+                    }  
+                }
+                else {
+                    for (let j = 0; j < 9; j++) {
+                        sq_click = document.getElementById("sq" +j);
+                        sq_click.addEventListener("click", function(){
+                            result = document.getElementById("result");
+                            turn = document.getElementById("turn");
+						    theID = this.id;
+						    number = theID.substring(2); 
+						    result.innerHTML = "There is now a mark in square " + number;
+                            let mark = spatt[j];
+                            turn.innerHTML = "It is " + mark + " turn";
+                            this.innerHTML = mark;
+                            console.log(spatt[j]);
+                        })
+                    }
+                }
+            }    
+		</script>
+        </div>
+		<div id="result"></div>
+		<p>The winner is...</p>
+	</body>
+</html>
