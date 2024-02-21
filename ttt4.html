@@ -2,45 +2,22 @@
 <html>
 	<head>
 		<style>
-			.square {border: 1px solid black;
-				 display: inline-block;
-				 padding: 5px;
-				 vertical-align: top;
-				 margin: 5px;
-				 height: 120px;
-				 width: 100px;
-				 text-align: center;
+			.square {border: 1px solid black; display: inline-block;
+				 padding: 5px; vertical-align: top; margin: 5px;
+				 height: 120px; width: 100px; text-align: center;
 				 font-size: 60px;}
 
 			.square:hover {background-color: pink;}
-
             #board {width:420px}
 
-			p {border: 2px solid black;
-			   width: 200px;
-			   height: 20px;
-			   font-size: 18px;
-			   text-align: center;}
-
-			#result {border: 2px solid black;
-				 margin-top: 20px;
-				 height: 40px;
-				 width: 200px;
-				 font-size: 18px;
-			         text-align: center;
-			}
-
-			#turn {border: 2px solid black;
-				 margin-top: 20px;
-				 height: 40px;
-				 width: 200px;
-			         font-size: 18px;
-			         text-align: center;
-			}
+			#winner, #start, #turn, #result {border: 2px solid black;
+                 padding-top: 10px; padding-left: 10px; margin-top: 20px;
+				 height: 50px; width: 200px; font-size: 18px;}
 		</style>
 	</head>
 	<body>
 		<h2>Tic Tac Toe</h2>
+        <div id="start">Start Game</div>
         <div id="turn"></div>
         <div id="board">
 		<script>
@@ -49,26 +26,36 @@
 					id = "sq"+i;
 					document.write("<div class='square' id='" + id + "'></div>" );		
 				}
-
             let fpatt = ['X', 'O', 'X','O', 'X', 'O','X', 'O', 'X'];
             let spatt = ['O', 'X', 'O','X', 'O', 'X','O', 'X', 'O'];
             let myTurn = ['X', 'O'];
+            let divs = ['sq0', 'sq1', 'sq2', 'sq3', 'sq4', 'sq5', 'sq6', 'sq7', 'sq8'];
+            let of8strings = [];
 
             window.onload=function() {
                 let turn = myTurn[Math.floor(Math.random()*myTurn.length)];
                 if (turn === 'X') {
+                    loop1:
                     for (let j = 0; j < 9; j++) {
                         sq_click = document.getElementById("sq" +j);
                         sq_click.addEventListener("click", function(){
                             result = document.getElementById("result");
                             turn = document.getElementById("turn");
-						    theID = this.id;
-						    number = theID.substring(2); 
-						    result.innerHTML = "There is now a mark in square " + number;
+			    theID = this.id;
+			    number = theID.substring(2); 
+			    result.innerHTML = "There is now a mark in square " + number;
                             let mark = fpatt[j];
                             turn.innerHTML = "It is " + mark + " turn";
                             this.innerHTML = mark;
-                            console.log(fpatt[j]);
+                            contents= divs.map(id=>document.getElementById(id).innerHTML);
+                        })
+
+                        clear = document.getElementById("start");
+                        clear.addEventListener("click", function(){
+                            sq_clear = document.getElementById("sq" + j);
+                            result = document.getElementById("result");
+                            result.innerHTML = "";
+                            sq_clear.innerHTML = "";
                         })
                     }  
                 }
@@ -78,20 +65,27 @@
                         sq_click.addEventListener("click", function(){
                             result = document.getElementById("result");
                             turn = document.getElementById("turn");
-						    theID = this.id;
-						    number = theID.substring(2); 
-						    result.innerHTML = "There is now a mark in square " + number;
+			    theID = this.id;
+			    number = theID.substring(2); 
+			    result.innerHTML = "There is now a mark in square " + number;
                             let mark = spatt[j];
                             turn.innerHTML = "It is " + mark + " turn";
                             this.innerHTML = mark;
-                            console.log(spatt[j]);
+                            contents= divs.map(id=>document.getElementById(id).innerHTML);
+                        })
+                        clear = document.getElementById("start");
+                        clear.addEventListener("click", function(){
+                            sq_clear = document.getElementById("sq" + j);
+                            result = document.getElementById("result");
+                            result.innerHTML = "";
+                            sq_clear.innerHTML = "";
                         })
                     }
                 }
-            }    
+            }              
 		</script>
         </div>
 		<div id="result"></div>
-		<p>The winner is...</p>
+		<div id="winner"></div>
 	</body>
 </html>
